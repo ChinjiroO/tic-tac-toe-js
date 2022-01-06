@@ -11,14 +11,14 @@ function start() {
     cell.classList.remove("cross");
     cell.classList.remove("circle");
     cell.removeEventListener("click", handleClick);
-    cell.addEventListener("click", handleClick, { once: false });
+    cell.addEventListener("click", handleClick, { once: true });
     // TODO: check classList of element if !== circle then add circle class
   });
 }
 
 function handleClick(e) {
   const cell = e.target;
-  const mask = !turn ? "circle" : "cross";
+  const mask = turn ? "cross" : "circle";
   addMask(cell, mask);
   if (!turn) {
     myConst.playerTurn.innerHTML = "Player 1 turn";
@@ -30,14 +30,4 @@ function handleClick(e) {
 
 function addMask(cell, mask) {
   cell.classList.add(mask);
-}
-
-function turnTracker(player) {
-  let message;
-  if (player === true) {
-    message = "Player 1 turn";
-  } else {
-    message = "Player 2 turn";
-  }
-  return message;
 }
