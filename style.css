@@ -4,7 +4,8 @@
 :root {
   --bg-color: 246, 249, 248;
   --board-color: 253, 253, 253;
-  --circle-svg: circle.svg;
+  --circle-svg: url(./assets/circle.svg);
+  --cross-svg: url(./assets/cross.svg);
 }
 body {
   margin: 0;
@@ -34,12 +35,16 @@ body {
 }
 
 .column {
-  width: 33.33%;
+  width: 33.3%;
 }
 .cell {
   border: 2px solid rgba(0, 0, 0, 0.1);
   height: 33.3%;
-  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0.75em;
 }
 
 .column:first-child .cell {
@@ -54,6 +59,7 @@ body {
 .cell:first-child {
   border-top: none;
 }
+
 .column:nth-child(2) .cell {
   width: auto;
   border-top: none;
@@ -62,6 +68,7 @@ body {
   width: auto;
   border-bottom: none;
 }
+
 .column:last-child .cell {
   width: auto;
   border-left: none;
@@ -71,6 +78,11 @@ body {
 .column:last-child .cell:last-child {
   border-bottom: none;
 }
-.cell.col-1 {
-  content: url(./assets/circle.svg);
+.cell.circle {
+  content: var(--circle-svg);
+}
+
+.cell.cross {
+  content: var(--cross-svg);
+  /* z-index: 0; */
 }
