@@ -11,6 +11,8 @@ const winning_combinations = [
   [3, 4, 5],
   [6, 7, 8],
 ];
+const modal = document.getElementById("modal");
+const restartBtn = document.getElementById("restartBtn");
 let turn = true;
 start();
 
@@ -23,14 +25,22 @@ function start() {
     cell.addEventListener("click", handleClick, { once: true });
   });
 }
+
 function handleClick(e) {
   const cell = e.target;
   const mask = turn ? "cross" : "circle";
+  let player;
+  if (mask == "cross") {
+    player = "1";
+  } else {
+    player = "2";
+  }
   addMask(cell, mask);
   if (winner(mask)) {
-    start();
+    // alert(`player ${player}'s winner`);
+    restart(player);
   } else if (draw()) {
-    window.alert("draw!!!");
+    restart();
   } else {
     player_turn();
   }
@@ -63,4 +73,19 @@ function winner(mask) {
 
 function addMask(cell, mask) {
   cell.classList.add(mask);
+}
+function restart(player) {
+  modal.style.display = "flex";
+  const newModal = document.createElement("div");
+  if (player !== undefined) {
+    newModal.innerHTML = player;
+  } else {
+    newModal.innerHTML = "Draw";
+  }
+  modal.appendChild(newModal);
+  restartBtn.addEventListener("click", function () {
+    start();
+    newModal.innerHTML = "";
+    modal.style.display = "none";
+  });
 }
